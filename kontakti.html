@@ -90,59 +90,79 @@ footer{background:#000;color:#bbb;padding:32px 20px;font-size:13px}.foot{max-wid
   </div>
 </div></footer>
 
-<!-- SOLGRESS Virtual Assistant with LOGO -->
+
+<!-- SOLGRESS AI Expert Assistant - No quick topics, positions as industry experts -->
 <style>
 #solgress-chat-btn{position:fixed;bottom:20px;right:20px;z-index:999;background:#0A0A0A;color:#fff;border:2px solid #FFB800;border-radius:999px;padding:10px 16px;display:flex;align-items:center;gap:10px;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.25);font-weight:800;font-size:14px;transition:.2s}
 #solgress-chat-btn:hover{background:#FFB800;color:#000;transform:translateY(-2px)}
 #solgress-chat-btn .cloud-logo{width:38px;height:38px;background:#fff;border-radius:50% 50% 50% 10px;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid #FFB800}
 #solgress-chat-btn .cloud-logo img{width:30px;height:auto}
-#solgress-chat-window{position:fixed;bottom:90px;right:20px;width:360px;max-width:calc(100vw - 40px);height:480px;background:#fff;border:1px solid #EAEAEA;border-radius:20px;box-shadow:0 18px 44px rgba(0,0,0,.2);z-index:999;display:none;flex-direction:column;overflow:hidden}
+#solgress-chat-window{position:fixed;bottom:90px;right:20px;width:380px;max-width:calc(100vw - 40px);height:520px;background:#fff;border:1px solid #EAEAEA;border-radius:20px;box-shadow:0 18px 44px rgba(0,0,0,.2);z-index:999;display:none;flex-direction:column;overflow:hidden}
 #solgress-chat-window.open{display:flex}
-.chat-header{background:#0A0A0A;color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+.chat-header{background:#0A0A0A;color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
 .chat-header .h-left{display:flex;align-items:center;gap:10px}
-.chat-header .h-left img{height:20px}
-.chat-messages{flex:1;overflow:auto;padding:14px;display:flex;flex-direction:column;gap:10px;background:#FAFAFA}
-.msg{max-width:85%;padding:10px 12px;border-radius:14px;font-size:13px;line-height:1.4}
-.msg.bot{background:#fff;border:1px solid #EAEAEA;align-self:flex-start}
+.chat-header .h-left img{height:22px}
+.chat-header small{display:block;font-size:10px;color:#FFB800;font-weight:700;letter-spacing:.08em;margin-top:2px}
+.chat-messages{flex:1;overflow:auto;padding:16px;display:flex;flex-direction:column;gap:12px;background:#FAFAFA}
+.msg{max-width:88%;padding:11px 14px;border-radius:16px;font-size:13.5px;line-height:1.5}
+.msg.bot{background:#fff;border:1px solid #EAEAEA;align-self:flex-start;box-shadow:0 2px 8px rgba(0,0,0,.04)}
 .msg.user{background:#FFB800;color:#000;align-self:flex-end;font-weight:600}
 .chat-input{display:flex;gap:8px;padding:12px;border-top:1px solid #EAEAEA;background:#fff}
-.chat-input input{flex:1;border:1px solid #ddd;border-radius:999px;padding:10px 14px;font-size:13px}
-.chat-input button{background:#000;color:#fff;border:0;border-radius:999px;padding:10px 14px;font-weight:800;cursor:pointer}
-.quick-qs{display:flex;flex-wrap:wrap;gap:6px;padding:0 14px 10px;background:#FAFAFA}
-.quick-q{border:1px solid #ddd;background:#fff;border-radius:999px;padding:6px 10px;font-size:11px;cursor:pointer;font-weight:600}
-.quick-q:hover{background:#000;color:#fff}
-@media(max-width:820px){#solgress-chat-window{bottom:80px;right:10px;width:calc(100vw - 20px);height:70vh}}
+.chat-input input{flex:1;border:1px solid #ddd;border-radius:999px;padding:11px 14px;font-size:13px;outline:none}
+.chat-input input:focus{border-color:#000}
+.chat-input button{background:#000;color:#fff;border:0;border-radius:999px;padding:11px 16px;font-weight:800;cursor:pointer;transition:.2s}
+.chat-input button:hover{background:#FFB800;color:#000}
+@media(max-width:820px){#solgress-chat-window{bottom:80px;right:10px;width:calc(100vw - 20px);height:68vh}}
 </style>
-<div id="solgress-chat-btn" onclick="toggleSolgressChat()"><div class="cloud-logo"><img src="logo-black.png" alt="SOLGRESS logo"></div><span>SOLGRESS asistents</span></div>
+<div id="solgress-chat-btn" onclick="toggleSolgressChat()"><div class="cloud-logo"><img src="logo-black.png" alt="SOLGRESS"></div><span>SOLGRESS AI</span></div>
 <div id="solgress-chat-window">
-  <div class="chat-header"><div class="h-left"><img src="logo-white.png" alt="SOLGRESS"><b>asistents</b></div><button onclick="toggleSolgressChat()" style="background:transparent;border:0;color:#fff;font-size:18px;cursor:pointer">✕</button></div>
-  <div class="chat-messages" id="chatMessages"><div class="msg bot">Sveiki! Esmu SOLGRESS virtuālais asistents ☀️ ar logo augšā — jautā par montāžu, EV lādētāju, siltumnīcām, transportu, torni vai Goda karti.</div></div>
-  <div class="quick-qs">
-    <span class="quick-q" onclick="askQuick('10 kW cena?')">10 kW cena?</span>
-    <span class="quick-q" onclick="askQuick('Transports')">Transports</span>
-    <span class="quick-q" onclick="askQuick('EV uzlāde')">EV uzlāde</span>
-    <span class="quick-q" onclick="askQuick('Siltumnīcas')">Siltumnīcas</span>
-    <span class="quick-q" onclick="askQuick('Goda karte')">Goda karte</span>
-  </div>
-  <div class="chat-input"><input id="chatInput" placeholder="Raksti jautājumu..." onkeydown="if(event.key==='Enter')sendChat()"><button onclick="sendChat()">→</button></div>
+  <div class="chat-header"><div class="h-left"><img src="logo-white.png" alt="SOLGRESS"><div><b>SOLGRESS</b><small>NOZARES EKSPERTS • AI ASISTENTS</small></div></div><button onclick="toggleSolgressChat()" style="background:transparent;border:0;color:#fff;font-size:20px;cursor:pointer">✕</button></div>
+  <div class="chat-messages" id="chatMessages"><div class="msg bot">Sveiki! Esmu SOLGRESS AI asistents — nozares eksperts saules enerģijā, EV uzlādē un siltumnīcās. ☀️<br><br>KMR PROGRESS SIA montē kopš 2014. gada — no 5 kW privātmājai līdz 100+ kW komercam. Jautā par jebko — cenu, jumta veidu, transportu, torni, garantiju, atbalstu.<br><br>📧 info@kmrprogress.lv | 📞 +371 23224880</div></div>
+  <div class="chat-input"><input id="chatInput" placeholder="Jautā par montāžu, cenu, jumtu, EV..." onkeydown="if(event.key==='Enter')sendChat()"><button onclick="sendChat()">→</button></div>
 </div>
 <script>
 function toggleSolgressChat(){document.getElementById('solgress-chat-window').classList.toggle('open');}
-function askQuick(q){document.getElementById('chatInput').value=q;sendChat();}
 function botReply(t){const m=document.getElementById('chatMessages');const d=document.createElement('div');d.className='msg bot';d.innerHTML=t; m.appendChild(d); m.scrollTop=m.scrollHeight;}
 function userMsg(t){const m=document.getElementById('chatMessages');const d=document.createElement('div');d.className='msg user';d.textContent=t; m.appendChild(d); m.scrollTop=m.scrollHeight;}
 function getAnswer(q){
-  q=q.toLowerCase();
-  if(q.includes('10 kw')||q.includes('cena')||q.includes('price')) return "10 kW uz dakstiņa: 10×140 € = 1400 € montāža + transports 0.45 €/km min 40 € + tornis ja >4 m (25 €/d + 100 €). Kalkulators sadaļā Enerģētika.";
-  if(q.includes('transport')) return "Transports 0.45 €/km B-O-B min 40 € Rīga, siltumnīcām 0.30 €/km.";
-  if(q.includes('torn')||q.includes('tower')) return "Tornis ja >4 m: 25 €/d + 100 € piegāde. Auto 2 dienas ja slīpums >40° un >10 paneļi.";
-  if(q.includes('ev')||q.includes('uzlād')) return "EV uzlādes stacijas montāža — SOLGRESS melnais stabs ar displeju (bilde lapā). Raksti WhatsApp +371 23224880.";
-  if(q.includes('siltumnīc')||q.includes('greenhouse')) return "KLASIKA 6 330/352 €, KLASIKA 12 484/528 €, STANDART 5 445/511 €, STANDART 10 583/689 € (4mm/6mm). Montāža 2-12m 200-450 €.";
-  if(q.includes('goda')||q.includes('honor')) return "Goda karte: 15% montāžai, 5% papildu. Raksti info@kmrprogress.lv";
-  return "Paldies! Raksti WhatsApp +371 23224880 vai izmanto kalkulatorus. Esmu ar SOLGRESS logo mākonītī ☁️";
+  const orig=q; q=q.toLowerCase();
+  // Expert positioning for all questions
+  if(q.includes('cena')||q.includes('price')||q.includes('maksa')||q.includes('10 kw')||q.includes('kw')){
+    return "Kā nozares eksperti kopš 2014. gada, mēs rēķinām caurspīdīgi:<br><br><b>Saules paneļu montāža:</b> 110-140 € / panelis atkarībā no jumta:<br>• Dakstiņš (betona/māla): 140 €<br>• Šīferis (bezazbesta): 120 €<br>• Metāls/valcprofils: 110 €<br>• Balasts (plakans): 110 €<br>• Zeme skrūvpāļi/betonēšana: 120-130 €<br><br>+ Transports 0.45 €/km min 40 € + tornis ja >4m (25 €/d + 100 € piegāde).<br><br>Precīzu tāmi aprēķina mūsu kalkulators sadaļā <b>Enerģētika</b> — ievadi jaudu, slīpumu, augstumu. Vai sūti jumta bildes uz info@kmrprogress.lv — tāme 24h.";
+  }
+  if(q.includes('transport')||q.includes('nogād')){
+    return "Transports: 0.45 €/km turp-atpakaļ, min 40 € Rīgas reģionā. Siltumnīcām 0.30 €/km. Mēs vedam paši — KMR PROGRESS busiņš ar materiāliem. Adrese noliktavai: Ādmiņu 4, Rīga.";
+  }
+  if(q.includes('torn')||q.includes('tower')||q.includes('augst')){
+    return "Tornis nepieciešams ja jumts >4m vai slīpums >40° un >10 paneļi. Izmaksas: 25 €/diena + 100 € piegāde. Parasti 1-2 dienas. Kā eksperti mēs novērtējam pēc bildēm — atsūti uz info@kmrprogress.lv.";
+  }
+  if(q.includes('ev')||q.includes('uzlād')||q.includes('lad')||q.includes('wallbox')||q.includes('elektroauto')){
+    return "EV uzlādes stacijas — mūsu jaunais virziens. Montējam SOLGRESS melno stabu ar displeju un balto dubulto ātro (22 kW, Type 2 / CCS, RFID, uzskaite). Privātmājai un biznesam ar garantiju un palīdzam ar pieslēgumu pie Sadales tīkla. Raksti info@kmrprogress.lv vai +371 23224880 — pastāstīsim kā nozares eksperti.";
+  }
+  if(q.includes('siltumnīc')||q.includes('greenhouse')||q.includes('klasika')||q.includes('standart')){
+    return "Polikarbonāta siltumnīcas KLASIKA un STANDART — mūsu otrs virziens kopš 2014. gada:<br><br>KLASIKA 6 (3x2m): 330 € (4mm) / 352 € (6mm)<br>KLASIKA 12 (3x4m): 484 € / 528 €<br>STANDART 5 (2.5x2m): 445 € / 511 €<br>STANDART 10 (2.5x4m): 583 € / 689 €<br><br>+ Montāža: 2m 200 € līdz 12m 450 €. Pamati visā Latvijā un Eiropā. Kalkulators sadaļā Siltumnīcas.";
+  }
+  if(q.includes('jumts')||q.includes('roof')||q.includes('daksti')||q.includes('šīfer')||q.includes('metāl')||q.includes('balast')){
+    return "Kā nozares eksperti mēs montējam uz visiem jumtiem:<br><br>• <b>Betona/māla dakstiņš</b> — visbiežāk privātmājās, 140 €/panelis, ar dakstiņu āķiem<br>• <b>Bezazbesta šīferis</b> — 120 €, ar blīvējumu<br>• <b>Metāls/valcprofils/trapezoids</b> — 110 €, mini rail sistēma<br>• <b>Balasts (plakans jumts)</b> — 110 €, bez urbšanas<br>• <b>Zeme</b> — skrūvpāļi vai betonēšana, 120-130 €<br><br>Atsūti jumta bildi uz info@kmrprogress.lv — pateiksim tipu 1h laikā.";
+  }
+  if(q.includes('garant')||q.includes('warranty')){
+    return "Kā nozares eksperti dodam garantiju: montāžai 2 gadi, paneļiem 25 gadi (ražotāja), invertoram 10-12 gadi. EV stacijām 2 gadi. Siltumnīcām polikarbonātam 10 gadi. Viss ar KMR PROGRESS SIA līgumu — Reg Nr 40103819003, juridiskā Plēksnes 16-21, Rīga.";
+  }
+  if(q.includes('atbalsts')||q.includes('support')||q.includes('goda')||q.includes('altum')||q.includes('eiro')){
+    return "Goda ģimenes karte: 15% atlaide montāžai, 5% precēm. ALTUM un EU atbalsts saules paneļiem privātmājām — līdz 4000 €, mēs palīdzam ar dokumentiem kā eksperti. Raksti info@kmrprogress.lv — pastāstīsim kā noformēt.";
+  }
+  if(q.includes('kontakt')||q.includes('adres')||q.includes('kur')||q.includes('phone')||q.includes('email')){
+    return "KMR PROGRESS SIA — SOLGRESS zīmols:<br><br>📍 Juridiskā: Plēksnes 16-21, Rīga LV-1016<br>📦 Noliktava: Ādmiņu 4, Rīga LV-1016<br>📧 info@kmrprogress.lv (forward uz gmail)<br>📞 +371 23224880<br>🌐 kmrprogress.lv<br><br>Darba laiks: P-Pk 9-18, S 10-16. Bezmaksas tāme 24h pēc bildēm WhatsApp.";
+  }
+  if(q.includes('komerc')||q.includes('biznes')||q.includes('industrial')||q.includes('100 kw')||q.includes('liels')){
+    return "Komercprojekti — mūsu ekspertīze: no 30 kW līdz 100+ kW uz plakaniem balasta jumtiem, valcprofila, zemes. 60 kW, 100 kW Lidosta Rīga, Vācija Erlus rūpnīca 100 kW — mūsu darbi. Atmaksāšanās biznesam ātrāka. Kalkulators un tāme 24h — info@kmrprogress.lv";
+  }
+  // Default expert answer for any other question
+  return "Kā SOLGRESS — KMR PROGRESS SIA nozares eksperti kopš 2014. gada, mēs atbildam uz jebkuru jautājumu par saules enerģiju, EV un siltumnīcām.<br><br>Tavs jautājums: <i>"+orig+"</i><br><br>Saules enerģija privātmājām un biznesam visā Eiropā — montāža ar garantiju, caurspīdīga tāme ar kalkulatoru sadaļā Enerģētika. EV uzlādes stacijas un polikarbonāta siltumnīcas KLASIKA/STANDART ar pamatiem.<br><br>📧 info@kmrprogress.lv | 📞 +371 23224880 — raksti, atbildēsim kā eksperti 1h laikā darba laikā. Vai izmanto kalkulatoru lapā.";
 }
-function sendChat(){const i=document.getElementById('chatInput');const q=i.value.trim(); if(!q) return; userMsg(q); i.value=''; setTimeout(()=>{botReply(getAnswer(q))},400);}
+function sendChat(){const i=document.getElementById('chatInput');const q=i.value.trim(); if(!q) return; userMsg(q); i.value=''; setTimeout(()=>{botReply(getAnswer(q))},500);}
 </script>
+
 
 <script>
 function toggleMobile(){document.getElementById('mobileMenu').classList.toggle('open');}
