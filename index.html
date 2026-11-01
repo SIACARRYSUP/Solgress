@@ -116,7 +116,7 @@ footer{background:#000;color:#bbb;padding:32px 20px;font-size:13px}.foot{max-wid
 
 <section class="section">
   <h2 data-i18n="works_title">Mūsu darbi</h2>
-  <p class="sub" data-i18n="works_sub">10+ gadu pieredze. Vairāk kā 1000 privātmājas, vairāk kā 200 biznesa projekti un 20 industriālie parki visā Eiropā — profesionāla montāža ar augstāko kvalitātes standartu.</p>
+  <p class="sub" data-i18n="works_sub">10+ gadu pieredze uz visa veida jumtu segumiem. Katram projektam atradīsim piemērotākos stiprinājumus.</p>
   <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px">
     <div class="media" style="aspect-ratio:4/3"><img src="real-4.jpg" alt="Saules paneļi uz dakstiņa jumta" loading="lazy"></div>
     <div class="media" style="aspect-ratio:4/3"><img src="real-5.jpg" alt="Saules paneļi pelēks dakstiņš" loading="lazy"></div>
@@ -291,4 +291,65 @@ let cTimer=setInterval(carouselNext,4000);
 document.getElementById('igCarousel')?.addEventListener('mouseenter',()=>clearInterval(cTimer));
 document.getElementById('igCarousel')?.addEventListener('mouseleave',()=>cTimer=setInterval(carouselNext,4000));
 let startX=0;
-document.getElementById('carouselTrack')?.
+document.getElementById('carouselTrack')?.addEventListener('touchstart',e=>startX=e.touches[0].clientX);
+document.getElementById('carouselTrack')?.addEventListener('touchend',e=>{let dx=e.changedTouches[0].clientX-startX; if(Math.abs(dx)>40){dx<0?carouselNext():carouselPrev();}});
+</script>
+
+<script>
+function toggleMobile(){document.getElementById('mobileMenu').classList.toggle('open');}
+const translations = {
+  lv: {
+    nav_home:"Sākumlapa",
+    nav_energy:"Enerģētika",
+    nav_green:"Siltumnīcas",
+    nav_contacts:"Kontakti",
+    top_badge:"Ar Goda ģimenes karti — 15% atlaide montāžai",
+    btn_free:"Bezmaksas tāme →",
+    btn_whatsapp:"WhatsApp +371 23224880",
+    hero_title:"Virzies uz sauli.",
+    hero_lead:"Saules enerģija Privātmājām, Biznesam, un Industriālajiem projektiem",
+    works_title:"Mūsu darbi",
+    works_sub:"10+ gadu pieredze. Vairāk kā 1000 privātmājas, vairāk kā 200 biznesa projekti un 20 industriālie parki visā Eiropā — profesionāla montāža ar augstāko kvalitātes standartu.",
+    ig_title:"Mūsu darbi Instagram stilā",
+    ig_btn:"Skatīt vairāk Instagram →",
+    footer_brand:"SOLGRESS ir KMR PROGRESS, SIA zīmols. Saules paneļu montāža un siltumnīcas visā Latvijā.",
+    footer_contact:"Kontakti",
+    footer_hours:"Darba laiks"
+  },
+  en: {
+    nav_home:"Home",
+    nav_energy:"Energy",
+    nav_green:"Greenhouses",
+    nav_contacts:"Contacts",
+    top_badge:"With Honor Family card — 15% off installation",
+    btn_free:"Free estimate →",
+    btn_whatsapp:"WhatsApp +371 23224880",
+    hero_title:"Move towards the sun.",
+    hero_lead:"Solar energy for Homes, Businesses, and Industrial Projects",
+    works_title:"Our Work",
+    works_sub:"10+ years of experience. Over 1,000 residential homes, 200+ commercial projects, and 20 industrial solar parks across Europe — professional installation with top quality standards.",
+    ig_title:"Our Work in Instagram Style",
+    ig_btn:"View more on Instagram →",
+    footer_brand:"SOLGRESS is a brand of KMR PROGRESS, SIA. Solar panel installation and greenhouses across Latvia.",
+    footer_contact:"Contacts",
+    footer_hours:"Working hours"
+  }
+};
+function setLang(l){
+  localStorage.setItem('solgress_lang',l);
+  document.documentElement.lang=l;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const k=el.getAttribute('data-i18n');
+    if(translations[l]&&translations[l][k]) el.textContent=translations[l][k];
+  });
+  document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('active',b.dataset.lang===l||b.textContent.toLowerCase()===l));
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  const saved=localStorage.getItem('solgress_lang')||'lv';
+  document.querySelectorAll('.lang button').forEach(b=>{b.dataset.lang=b.textContent.toLowerCase();});
+  setLang(saved);
+  renderCarousel();
+});
+</script>
+</body>
+</html>
