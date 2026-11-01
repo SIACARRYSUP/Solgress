@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Siltumnīcas — SOLGRESS</title>
+<link rel="canonical" href="https://kmrprogress.lv/siltumnicas.html">
+<meta property="og:url" content="https://kmrprogress.lv/siltumnicas.html">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:Inter,system-ui,sans-serif;background:#fff;color:#111;line-height:1.6}
+header{border-bottom:1px solid #EAEAEA;padding:16px 24px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:#fff;z-index:10}
+header img{height:28px}nav a{margin-left:18px;text-decoration:none;color:#111;font-size:14px;font-weight:500}nav a.active{text-decoration:underline;text-underline-offset:4px}
+.wrap{max-width:1120px;margin:0 auto;padding:40px 24px}
+h1{font-size:34px;line-height:1.05;max-width:760px;letter-spacing:-0.02em}
+.gallery{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+@media(max-width:700px){.gallery{grid-template-columns:1fr}}
+.gallery img{width:100%;height:380px;object-fit:cover;border-radius:16px;border:1px solid #EAEAEA;display:block}
+.calc{margin-top:32px;border:1px solid #EAEAEA;border-radius:16px;padding:20px;background:#FAFAFA;max-width:720px}
+.calc h3{font-size:16px;margin-bottom:12px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.row label{font-size:13px}
+.row input{width:70px;border:1px solid #D9D9D9;border-radius:8px;padding:8px 10px;font-size:14px;text-align:center}
+.m2{font-weight:700;background:#fff;border:1px solid #EAEAEA;padding:6px 12px;border-radius:8px;min-width:90px;text-align:center}
+.price{font-size:22px;font-weight:800;margin-top:8px}
+.tiers{margin-top:12px;display:grid;grid-template-columns:repeat(2,1fr);gap:6px;font-size:12px;color:#555}
+@media(max-width:500px){.tiers{grid-template-columns:1fr}}
+.papildus{margin-top:16px}
+.papildus button{width:280px;max-width:100%;border:1px solid #111;background:#111;color:#fff;border-radius:10px;padding:10px 14px;font-size:13px;cursor:pointer}
+.papildus .extra{margin-top:12px;display:none;gap:8px;flex-wrap:wrap}
+.papildus .extra.open{display:flex}
+.chip{border:1px solid #EAEAEA;background:#fff;border-radius:999px;padding:6px 12px;font-size:12px;cursor:pointer}
+.chip.active{background:#111;color:#fff;border-color:#111}
+.g-avatar-white{width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid #EAEAEA;color:#000;display:flex;align-items:center;justify-content:center;font-weight:800;position:relative}
+.g-avatar-white:after{content:'↗';color:#FFD400;position:absolute;right:-2px;top:-2px;font-size:12px;background:#fff;border:1px solid #EAEAEA;border-radius:50%;width:16px;height:16px;display:flex;align-items:center;justify-content:center}
+footer{border-top:1px solid #EAEAEA;padding:24px;display:flex;justify-content:space-between;align-items:center;margin-top:40px}
+</style>
+</head>
+<body>
+<header><a href="index.html"><img src="assets/logo-black.png" alt="SOLGRESS"></a>
+<nav><a href="index.html">Sākumlapa</a><a href="energetika.html">Enerģētika</a><a class="active" href="siltumnicas.html">Siltumnīcas</a><a href="kontakti.html">Kontakti</a></nav></header>
+<div class="wrap">
+<h1>Polikarbonāta siltumnīcas — izturīgas, Eiropā ražotas, no Omega formas metāla profīliem</h1>
+<p style="margin-top:12px;color:#666;max-width:680px">Klasiskā forma ar pastiprinātu karkasu. Montējam ar pamatu vai bez. Bez saules paneļu attēliem — tikai siltumnīcas.</p>
+
+<div class="gallery">
+<img src="assets/siltumnica-klasika-real.jpg" alt="Polikarbonāta siltumnīca klasika">
+<img src="assets/siltumnica-divi-puisi.jpg" alt="Siltumnīca ar diviem cilvēkiem pie siltumnīcas">
+</div>
+
+<div class="calc">
+<h3>Siltumnīcas kalkulators — kompakts</h3>
+<div class="row">
+<label>Platums m</label><input id="w" type="number" step="0.1" value="3">
+<label>× Garums m</label><input id="l" type="number" step="0.1" value="4">
+<span style="font-size:14px">=</span><div class="m2" id="m2">12 m²</div>
+</div>
+<div class="price" id="price">250€</div>
+<div class="tiers">
+<div>līdz 5m² — 200€</div>
+<div>5-12m² — 250€</div>
+<div>12-18m² — 300€</div>
+<div>18-24m² — 350€</div>
+<div>24-30m² — 400€</div>
+<div>virs 30m² — 450€+10€/m²</div>
+</div>
+<div style="margin-top:10px;font-size:12px;color:#666">Formula: Platums m × Garums m = m² auto. 70px inputs.</div>
+<div class="papildus">
+<button id="toggleExtra">Papildus +</button>
+<div class="extra" id="extra">
+<div class="chip" data-price="25">Logs +25€</div>
+<div class="chip" data-price="40">Ceļš +40€</div>
+<div class="chip" data-price="15">Tomātu trosītes +15€</div>
+<div class="chip" data-price="20">Papildus durvis +20€</div>
+<div class="chip" data-price="30">Automātiskais vēdinātājs +30€</div>
+</div>
+</div>
+</div>
+
+<div style="max-width:600px;margin:32px auto;background:#FAFAFA;border:1px solid #EAEAEA;border-radius:24px;padding:20px">
+<div style="display:flex;gap:12px;align-items:center"><div class="g-avatar-white">G</div><span style="font-size:13px">SOLGRESS — īss ieskats</span></div>
+<p style="margin-top:10px;font-size:13px;color:#555">Eiropā ražotas siltumnīcas, Omega profils, 10 gadu garantija karkasam.</p>
+</div>
+</div>
+<footer><div style="display:flex;gap:12px;align-items:center"><div class="g-avatar-white">G</div><span style="font-size:13px">info@kmrprogress.lv</span></div><span style="font-size:12px;color:#999">kmrprogress.lv</span></footer>
+
+<script>
+const w=document.getElementById('w'), l=document.getElementById('l'), m2=document.getElementById('m2'), price=document.getElementById('price'), extra=document.getElementById('extra');
+let extraSum=0;
+function calc(){
+ const ww=parseFloat(w.value)||0, ll=parseFloat(l.value)||0;
+ const area=ww*ll;
+ m2.textContent=area.toFixed(2)+' m²';
+ let base=0;
+ if(area<=5) base=200;
+ else if(area<=12) base=250;
+ else if(area<=18) base=300;
+ else if(area<=24) base=350;
+ else if(area<=30) base=400;
+ else base=450+Math.ceil(area-30)*10;
+ price.textContent=(base+extraSum)+'€';
+}
+w.addEventListener('input',calc); l.addEventListener('input',calc);
+document.getElementById('toggleExtra').addEventListener('click',()=>extra.classList.toggle('open'));
+document.querySelectorAll('.chip').forEach(ch=>{
+ ch.addEventListener('click',()=>{
+  ch.classList.toggle('active');
+  const p=parseInt(ch.dataset.price);
+  if(ch.classList.contains('active')) extraSum+=p; else extraSum-=p;
+  calc();
+ });
+});
+calc();
+</script>
+</body>
+</html>
